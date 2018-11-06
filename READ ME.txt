@@ -1,0 +1,7 @@
+// USER LOGIN
+user@user.com
+password
+
+//ADMIN LOGIN
+admin@admin.com
+password
