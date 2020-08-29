@@ -1,0 +1,33 @@
+Multiple Authentication in Laravel 5.6 
+
+--------
+Step: 1 
+--------
+
+Download from GitHub:
+https://github.com/amanat-juwel/multiauth56.git
+
+--------
+Step: 2 
+--------
+run command: composer update
+rename .env.example with .env
+configure database on .env file
+create a new database with name multiauth_56
+create new tables with: php artisan migrate
+php artisan key:generate
+
+--------
+Step: 3
+--------
+User:   localhost/multiauth56
+Addmin: localhost/multiauth56/admin
+
+
+we have to create new admin using laravel tinker
+
+I hope it will be a greate help for you.
+
+Thanks for watching this :)
+
+Please Subscribe me and Like my video.

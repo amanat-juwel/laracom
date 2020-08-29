@@ -1,0 +1,13 @@
+ITEM IMAGE 
+
+home 200 x 200
+
+initial 350 350 
+
+zoom 500 500
+
+mini 66x66
+
+sidebar image 50 50 
+
+BRAND IMAGE 60 60 
