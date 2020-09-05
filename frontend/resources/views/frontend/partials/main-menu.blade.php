@@ -121,7 +121,7 @@
           </li> -->
           
           <!-- <li><a href="#">Blog</a></li> -->
-          <li class="custom-link-right"><a href="#" target="#">Special Offers</a></li>
+          <!--<li class="custom-link-right"><a href="#" target="#">Special Offers</a></li>-->
         </ul>
       </div>
     </div>

@@ -16,10 +16,10 @@
     <div class="container">
       <!-- Breadcrumb Start-->
       <ul class="breadcrumb">
-        <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="login.html">Account</a></li>
-        <li><a href="order-history.html">Order History</a></li>
-        <li><a href="order-information.html">Order Information</a></li>
+        <li><a href=""><i class="fa fa-home"></i></a></li>
+        <li><a href="">Account</a></li>
+        <li><a href="">Order History</a></li>
+        <li><a href="">Order Information</a></li>
       </ul>
       <!-- Breadcrumb End-->
       <div class="row">
@@ -37,7 +37,7 @@
           <tr>
             <td style="width: 50%;" class="text-left">
               <b>Order ID:</b> #{{$orderObj->id}}<br>
-              <b>Date Added:</b> {{$orderObj->datetime}}</td>
+              <b>Order Date:</b> {{$orderObj->datetime}}</td>
             <td style="width: 50%;" class="text-left">
               <b>Payment Method:</b> {{$orderObj->payment_method}}<br>
               <!-- <b>Shipping Method:</b> Flat Shipping Rate     -->          
@@ -48,8 +48,8 @@
       <table class="table table-bordered table-hover">
         <thead>
           <tr>
-            <td style="width: 50%; vertical-align: top;" class="text-left">Payment Address</td>
-            <td style="width: 50%; vertical-align: top;" class="text-left">Shipping Address</td>
+            <td style="width: 50%; vertical-align: top;" class="text-left">Address</td>
+            <!--<td style="width: 50%; vertical-align: top;" class="text-left">Shipping Address</td>-->
           </tr>
         </thead>
         <tbody>
@@ -60,12 +60,12 @@
               {{$billing_address->address}}<br>
               {{$billing_address->city}}, {{$billing_address->postal_code}}<br>{{$billing_address->country}}
             </td>
-           <td class="text-left">
-              {{$delivery_address->fullname}}<br>
-              {{$delivery_address->mobile}}<br>
-              {{$delivery_address->address}}<br>
-              {{$delivery_address->city}}, {{$delivery_address->postal_code}}<br>{{$delivery_address->country}}
-            </td>
+           <!--<td class="text-left">-->
+           <!--   {{$delivery_address->fullname}}<br>-->
+           <!--   {{$delivery_address->mobile}}<br>-->
+           <!--   {{$delivery_address->address}}<br>-->
+           <!--   {{$delivery_address->city}}, {{$delivery_address->postal_code}}<br>{{$delivery_address->country}}-->
+           <!-- </td>-->
           </tr>
         </tbody>
       </table>
@@ -73,6 +73,7 @@
         <table class="table table-bordered table-hover">
           <thead>
             <tr>
+              <td class="text-left">Image</td>
               <td class="text-left">Product Name</td>
               <td class="text-right">Quantity</td>
               <td class="text-right">Price</td>
@@ -83,6 +84,7 @@
             @php $total = 0; @endphp
             @foreach($order_details as $data)
             <tr>
+              <td class="text-center"><a href=""><img class="img-thumbnail" src="{{asset($data->item_image)}}" width="80px" height"80px"></a></td>
               <td class="text-left">{{$data->item_name}}</td>
               <td class="text-right">{{$data->qty}}</td>
               <td class="text-right">BDT {{$data->rate}}</td>
@@ -94,7 +96,7 @@
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="2"></td>
+              <td colspan="3"></td>
               <td class="text-right"><b>Total</b></td>
               <td class="text-right">BDT {{$total}}</td>
             </tr>
@@ -112,7 +114,7 @@
         <tbody>
           @foreach($order_history as $data)
            <tr>
-            <td class="text-left">{{$data->datetime}}</td>
+            <td class="text-left">{{$data->created_at}}</td>
             <td class="text-left">{{$data->status}}</td>
           </tr>
           @endforeach

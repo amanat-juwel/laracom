@@ -26,7 +26,7 @@ Version     : 1.0
     <link rel="stylesheet" href="{{ asset('public/admin/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('public/admin/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('public/admin/css/AdminLTE.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/admin/css/select2.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('public/admin/css/select2.min.css') }}">
     <script src="{{ asset('public/admin/js/jquery.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     @yield('style')
@@ -504,26 +504,26 @@ Version     : 1.0
         <script src="{{ asset('public/admin/js/dataTables.bootstrap.min.js') }}"></script>
         <script src="{{ asset('public/admin/js/style.js') }}"></script>
         <script src="{{ asset('public/admin/js/custom.js') }}"></script>
-        <script src="{{ asset('public/admin/js/select2.full.min.js') }}"></script>
-        <!-- CK Editor -->
+		<script src="{{ asset('public/admin/js/select2.full.min.js') }}"></script>
+		<!-- CK Editor -->
         <!--<script src="{{ asset('public/admin/js/ckeditor/ckeditor.js') }}"></script>-->
         <!-- CK Editor -->
-        <script>
+		<script>
          
-        function Initialize() {
-            $('.select2').select2()
+		function Initialize() {
+			$('.select2').select2()
             //Tab key working in select2
             $('select').on("select2:close", function () { $(this).focus(); });
-            } 
-        </script>
+			} 
+		</script>
 
-        <script>
-          $(function () {
-            //Initialize Select2 Elements
-            $('.select2').select2()
+		<script>
+		  $(function () {
+			//Initialize Select2 Elements
+			$('.select2').select2()
             //Tab key working in select2
             $('select').on("select2:close", function () { $(this).focus(); });
-          })
+		  })
 
           //Date picker
             $('#datepicker').datepicker({
@@ -542,7 +542,7 @@ Version     : 1.0
                     $(".date-picker").blur();
                 }, 50);
             });  
-        </script>
+		</script>
 
         @yield('script')
         <!-- CK Editor -->

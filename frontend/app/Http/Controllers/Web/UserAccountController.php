@@ -67,8 +67,7 @@ class UserAccountController extends Controller
 
         //passed validation
         $order_history = DB::table('tbl_orders_history')
-        ->join('tbl_orders','tbl_orders.id','=','tbl_orders_history.order_id')
-        ->where('tbl_orders.id', $order_id)
+        ->where('order_id', $order_id)
         ->get();
 
         $order_details = DB::table('tbl_order_details')

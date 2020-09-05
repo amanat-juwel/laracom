@@ -3,11 +3,11 @@
 @section('title',$item->item_name)
 
 @section('style')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <style>
-    .swal2-select{
-        display: none !important;
-    }
+    /*.swal2-select{*/
+    /*    display: none !important;*/
+    /*}*/
 </style>
 @endsection
 
@@ -31,9 +31,9 @@
       <div class="row">
       <!--Right Part Start -->
         <aside id="column-left" class="col-sm-3 hidden-xs">
-        <!-- include('frontend.components.product.bestsellers')
-        include('frontend.components.product.specials') -->
-        @include('frontend.components.banner')
+        @include('frontend.components.product.bestsellers')
+        <!-- include('frontend.components.product.specials')
+        include('frontend.components.banner') -->
         </aside>
         <!--Right Part End -->
         <!--Middle Part Start-->
@@ -51,7 +51,7 @@
                   <li><b>Brand:</b> <a href="#"><span itemprop="brand">{{ $item->brand_name }}</span></a></li>
                   <li><b>Product Code:</b> <span itemprop="mpn">{{ str_pad($item->item_code, 4, '0', STR_PAD_LEFT) }}</span></li>
                   <!-- <li><b>Reward Points:</b> 700</li> -->
-                  <li><b>Availability:</b> @if($stock_qty>0)<span class="instock">In Stock</span>@else <span class="nostock">Out of Stock</span> @endif</li>
+                  <!--<li><b>Availability:</b> @if($stock_qty>0)<span class="instock">In Stock</span>@else <span class="nostock">Out of Stock</span> @endif</li>-->
                 </ul>
                 <ul class="price-box">
                   <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="price-old">@if(!empty($item->discounted_price)){{number_format($item->mrp,2).'৳'}}@endif</span> <span itemprop="price">@if(empty($item->discounted_price)) {{number_format($item->mrp,0).'৳'}}@else{{number_format($item->discounted_price,0).'৳'}}@endif<span itemprop="availability" content="In Stock"></span></span></li>
@@ -84,9 +84,23 @@
                           <a class="qtyBtn mines" href="javascript:void(0);">-</a>
                           <div class="clear"></div>
                         </div>
-                        <button type="submit" id="button-cart" class="btn btn-primary btn-lg">Add to Cart</button>
+                        <button type="submit" id="button-cart" class="btn btn-primary btn-lg">{{ getCartQty($item->item_id) }}</button>
+                        
                       </form>
                     </div>
+                    <?php
+                        function getCartQty($item_id) {
+                            $found = 0;
+                            foreach(Cart::content() as $cart){
+                                if ($cart->id == $item_id) {
+                                    $found = 1;
+                                    echo "$cart->qty in Cart";
+                                    break;
+                                }
+                            }
+                            echo (!$found) ? "Add to Cart" : '';
+                        }
+                    ?>
                     <div>
                       @if(Auth::user()!==null)
                       <button type="button" class="wishlist" id="wishlist_{{$item->item_id}}" onClick=""><i class="@if(!$is_wishlist)fa fa-heart-o @else fa fa-heart text-red @endif"></i> @if(!$is_wishlist)Add to Wish List @else Added to Wishlist @endif</button>
@@ -246,19 +260,24 @@ $(document).ready(function(){
 // END ADD TO FAVOURITE LIST
 
 @if(Session::has('success'))
-  <script>
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
+    // const Toast = Swal.mixin({
+    //   toast: true,
+    //   position: 'bottom-end',
+    //   showConfirmButton: false,
+    //   timer: 5000
+    // });
+
+    // Toast.fire({
+    //   type: 'success',
+    //   title: "{{Session::get('success')}}"
+    // })
+    Swal.fire({
+
+      icon: 'success',
+      title: "{{Session::get('success')}}",
       showConfirmButton: false,
       timer: 3000
-    });
-
-    Toast.fire({
-      type: 'success',
-      title: "{{Session::get('success')}}"
     })
-  </script>
   @php Session::forget('success');@endphp
 @endif
 

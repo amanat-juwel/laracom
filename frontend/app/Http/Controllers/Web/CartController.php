@@ -39,7 +39,7 @@ class CartController extends Controller
             'price' => $request->price
         ]);
 
-        return redirect()->back()->with('success','Added to Cart');
+        return redirect("web/products/$request->item_id/$request->item_name")->with('success','Added to Cart');
     }
 
     public function checkout()
@@ -49,14 +49,17 @@ class CartController extends Controller
 
     public function storecheckout(Request $request)
     {   
-
+        DB::beginTransaction();
         //get customer_id
-        if(Auth::user()==null){
+        $user = User::where('email', $request->email)->first();
+        if(Auth::user()==null && $user == null){
             //create new user account 
             $customer_id = $this->storeNewCustomer($request);
-        }
-        else{
+        } elseif(Auth::user()!=null){
             $customer = CustomerSystemUser::where('user_id',Auth::user()->id)->first(); 
+            $customer_id = $customer->customer_id;
+        } else {
+            $customer = CustomerSystemUser::where('user_id', $user->id)->first(); 
             $customer_id = $customer->customer_id;
         }
 
@@ -65,11 +68,15 @@ class CartController extends Controller
 
         //send user to user account panel
         if(Auth::user()==null){
-            if(Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->mobile_no])){
+            if(Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])){
+                return redirect('web/order-history');
+            }
+        } elseif($user != null) {
+            if(Auth::guard('web')->attempt(['email' => $user->email, 'password' => $request->password])){
                 return redirect('web/order-history');
             }
         }
-        
+        DB::commit();
         
         return redirect('web/order-history');
     }
@@ -88,7 +95,7 @@ class CartController extends Controller
         $customer->customer_code = ++$customer_code;
         $customer->customer_name = $request->name;
         $customer->mobile_no = ($request->mobile_no!='')? "88".$request->mobile_no : NULL;
-        $customer->gender = $request->gender;
+        $customer->gender = '';
         $customer->category = 1;
         ($request->debit!='')?$customer->op_bal_debit = $request->debit : $x=1;
         ($request->credit!='')?$customer->op_bal_credit = $request->credit : $x=1;
@@ -97,7 +104,7 @@ class CartController extends Controller
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->mobile_no);
+        $user->password = Hash::make($request->password);
         $user->role = 'admin';
         $user->save();
 
@@ -108,13 +115,36 @@ class CartController extends Controller
         $customer_system_user->save();
 
         //store address
-        $this->storeCustomerAddress($request, $customer->customer_id);
+        $this->storeCustomerAddressV2($request, $customer->customer_id);
 
         return $customer->customer_id;
 
         
     }
 
+    public function storeCustomerAddressV2($request, $customer_id){
+
+        //billing address
+        $address = new CustomerAddressBook;
+        $address->customer_id = $customer_id;
+        $address->fullname = $request->name;
+        $address->mobile = $request->mobile_no;
+        $address->address = $request->address_billing;
+        $address->city = $request->city_billing;
+        $address->postal_code = '';
+        $address->country = 'Bangladesh';
+        $address->save();
+        $billing_address_id = $address->id;
+
+        //delivery address
+        $delivery_address_id = $billing_address_id;
+
+        $customer = Customer::find($customer_id);
+        $customer->billing_address_id = $billing_address_id;
+        $customer->delivery_address_id = $delivery_address_id;
+        $customer->update();
+    }
+    
     public function storeCustomerAddress($request, $customer_id){
 
         //billing address
@@ -187,7 +217,7 @@ class CartController extends Controller
     {
         Cart::update($rowId, $request->quantity);
         
-        return redirect()->back()->with('success','Removed from Cart');
+        return redirect()->back()->with('success','Cart Updated');
     }
 
     public function destroy($rowId)

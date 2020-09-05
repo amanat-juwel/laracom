@@ -17,9 +17,9 @@
     <div class="container">
       <!-- Breadcrumb Start-->
       <ul class="breadcrumb">
-        <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="login.html">Account</a></li>
-        <li><a href="order-history.html">Order History</a></li>
+        <li><a href=""><i class="fa fa-home"></i></a></li>
+        <li><a href="">Account</a></li>
+        <li><a href="">Order History</a></li>
       </ul>
       <!-- Breadcrumb End-->
       <div class="row">
@@ -43,8 +43,8 @@
           <tbody>
             @foreach($orders as $data)
             <tr>
-              <td class="text-center"><a href="product.html"><img class="img-thumbnail" title="Aspire Ultrabook Laptop" alt="Aspire Ultrabook Laptop" src="image/product/samsung_tab_1-50x50.jpg"></a></td>
-              <td class="text-left"><a href="product.html">{{$data->item_name}}</a></td>
+              <td class="text-center"><a href=""><img class="img-thumbnail" src="{{asset($data->item_image)}}" width="80px" height"80px"></a></td>
+              <td class="text-left"><a href="">{{$data->item_name}}</a></td>
               <td class="text-center">#{{$data->order_id}}</td>
               <td class="text-center">{{$data->qty}}</td>
               <td class="text-center">{{$data->status}}</td>

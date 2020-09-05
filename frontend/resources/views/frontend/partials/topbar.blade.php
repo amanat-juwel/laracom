@@ -73,7 +73,7 @@
             <ul class="dropdown-menu dropdown-menu-right">
               <li><a href="{{url('web/my-account')}}">My Account</a></li>
               <li><a href="{{url('web/order-history')}}">Order History</a></li>
-              <li><a href="{{url('web/order-information')}}">Order Information</a></li>
+              <!--<li><a href="{{url('web/order-information')}}">Order Information</a></li>-->
             </ul>
           </li>
           @endif

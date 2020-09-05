@@ -3,11 +3,11 @@
 @section('title','Cart')
 
 @section('style')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <style>
-    .swal2-select{
-        display: none !important;
-    }
+    /*.swal2-select{*/
+    /*    display: none !important;*/
+    /*}*/
 </style>
 @endsection
 
@@ -156,16 +156,23 @@
 
 @if(Session::has('success'))
   <script>
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'bottom-end',
+    // const Toast = Swal.mixin({
+    //   toast: true,
+    //   position: 'top-end',
+    //   showConfirmButton: false,
+    //   timer: 3000
+    // });
+
+    // Toast.fire({
+    //   type: 'success',
+    //   title: "{{Session::get('success')}}"
+    // })
+    Swal.fire({
+
+      icon: 'success',
+      title: "{{Session::get('success')}}",
       showConfirmButton: false,
       timer: 3000
-    });
-
-    Toast.fire({
-      type: 'success',
-      title: "{{Session::get('success')}}"
     })
   </script>
   @php Session::forget('success');@endphp

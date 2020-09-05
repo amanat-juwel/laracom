@@ -92,6 +92,8 @@ class SettingsController extends Controller
                       'website' => "$request->website",
                       'sms_sender'=>"$request->sms_sender",
                       'sms_api_key'=>"$request->sms_api_key"]);
+                      
+        \Cache::forget('globalSettings');
 
         return redirect('/admin/settings')->with('success', 'Settings Updated Successfully');
 

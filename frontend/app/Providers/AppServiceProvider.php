@@ -25,21 +25,21 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         View::composer('*',function($view){
-            $globalSettings = \Cache::remember('globalSettings', 24*60, function() {
+            $globalSettings = \Cache::remember('globalSettings', 2*60, function() {
                 return DB::table('settings')->where('setting_id','=','1')->first();
             });
             $view->with('globalSettings',$globalSettings);
         });
 
         View::composer(['frontend.partials.footer'],function($view){
-            $pages_front_view = \Cache::remember('pages_front_view', 24*60, function() {
+            $pages_front_view = \Cache::remember('pages_front_view', 2*60, function() {
                 return Page::where('status',"PUBLISHED")->get();
             });
             $view->with('pages_front_view',$pages_front_view);
         });
 
-        View::composer(['frontend.partials.main-menu','frontend.home'],function($view){
-            $brands_front_view = \Cache::remember('brands_front_view', 24*60, function() {
+        View::composer(['frontend.partials.main-menu','frontend.home','frontend.product.brand.index'],function($view){
+            $brands_front_view = \Cache::remember('brands_front_view', 2*60, function() {
                 return Brand::where('is_active',1)->orderBy('brand_name')->get();
             });
             $view->with('brands_front_view',$brands_front_view);
@@ -77,7 +77,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['frontend.partials.category-menu','frontend.partials.main-menu'],function($view){
 
             
-            $all_categories_menu = \Cache::remember('all_categories_menu', 24*60, function() {
+            $all_categories_menu = \Cache::remember('all_categories_menu', 2*60, function() {
                 $categories = Category::orderBy('cata_name','asc')->get();
                 $sub_categories = Subcategory::orderBy('name','asc')->get();
                 $sub_sub_categories = SubSubcategory::orderBy('name','asc')->get();
@@ -120,7 +120,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer(['frontend.partials.footer','frontend.cart.checkout'],function($view){
-            $frontend_payment_methods = \Cache::remember('frontend_payment_methods', 24*60, function() {
+            $frontend_payment_methods = \Cache::remember('frontend_payment_methods', 2*60, function() {
                 return DB::table('frontend_payment_methods')->where('is_active','1')->get();
             });
             $view->with('frontend_payment_methods',$frontend_payment_methods);

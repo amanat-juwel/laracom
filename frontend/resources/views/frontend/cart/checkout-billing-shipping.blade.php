@@ -8,9 +8,9 @@
     <div class="container">
       <!-- Breadcrumb Start-->
       <ul class="breadcrumb">
-        <li><a href=""><i class="fa fa-home"></i></a></li>
-        <li><a href="">Shopping Cart</a></li>
-        <li><a href="">Checkout</a></li>
+        <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+        <li><a href="cart.html">Shopping Cart</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
       </ul>
       <!-- Breadcrumb End-->
       <div class="row">
@@ -50,12 +50,10 @@
             <form action="{{url('web/checkout')}}" method="post">
             @csrf
             <div class="col-sm-8">
-             <div class="row">
               @if(Auth::user()==null)
-              <div class="col-sm-12">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h4 class="panel-title"><i class="fa fa-user"></i> Customer Infomration</h4>
+                  <h4 class="panel-title"><i class="fa fa-user"></i> Your Personal Details</h4>
                 </div>
                   <div class="panel-body">
                         <fieldset id="account">
@@ -63,52 +61,139 @@
                             <div class="col-sm-6">
                               <div class="form-group required">
                                 <label for="input-payment-firstname" class="control-label">Name</label>
-                                <input type="text" class="form-control" id="input-payment-firstname" placeholder="Name" value="" name="name" required>
+                                <input type="text" class="form-control" id="input-payment-firstname" placeholder="Name" value="" name="name">
                               </div>
                             </div>
                             <div class="col-sm-6">
                               <div class="form-group required">
                                 <label for="input-payment-email" class="control-label">E-Mail</label>
-                                <input type="text" class="form-control" id="input-payment-email" placeholder="E-Mail" value="" name="email" required>
+                                <input type="text" class="form-control" id="input-payment-email" placeholder="E-Mail" value="" name="email">
                               </div>
                             </div>
                             <div class="col-sm-6">
                               <div class="form-group required">
-                                <label for="input-payment-telephone" class="control-label">Phone Number</label>
-                                <input type="text" class="form-control" id="input-payment-telephone" placeholder="Phone Number" value="" name="mobile_no" required>
+                                <label for="input-payment-telephone" class="control-label">Telephone</label>
+                                <input type="text" class="form-control" id="input-payment-telephone" placeholder="Telephone" value="" name="mobile_no">
                               </div>
                             </div>
                             <div class="col-sm-6">
                               <div class="form-group required">
-                                <label for="input-payment-password" class="control-label">Password</label>
-                                <input type="password" class="form-control" id="input-payment-telephone" placeholder="Password" value="" name="password" required>
+                                <label for="input-payment-telephone" class="control-label">Gender</label>
+                                <br>
+                                <input type="radio" name="gender" checked="" value="Male">
+                                Male</label> <input type="radio" name="gender" value="Female">
+                                Female</label>
                               </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group required">
-                                  <label for="input-payment-address-1" class="control-label">Address</label>
-                                  <textarea rows="1" class="form-control" id="address_billing" name="address_billing"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group required">
-                                  <label for="input-payment-city-1" class="control-label">City</label>
-                                  <input type="text" class="form-control" id="input-payment-city-1" placeholder="City" value="" name="city_billing">
-                                </div>
                             </div>
                           </div>
                         </fieldset>
                       </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"><i class="fa fa-book"></i> Your Billing Address</h4>
+                </div>
+                  <div class="panel-body">
+                        <fieldset id="address" class="required">
+                          <div class="form-group required">
+                            <label for="input-payment-company" class="control-label">Name</label>
+                            <input type="text" class="form-control" id="input-payment-company" placeholder="Name" value="" name="name_billing">
+                          </div>
+                          <div class="form-group required">
+                            <label for="input-payment-company" class="control-label">Phone</label>
+                            <input type="text" class="form-control" id="input-payment-company" placeholder="Phone" value="" name="mobile_no_billing">
+                          </div>
+                          <div class="form-group required">
+                            <label for="input-payment-address-1" class="control-label">Address</label>
+                            <input type="text" class="form-control" id="input-payment-address-1" placeholder="Address" value="" name="address_billing">
+                          </div>
+                            
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="form-group required">
+                                <label for="input-payment-city" class="control-label">City</label>
+                                <input type="text" class="form-control" id="input-payment-city" placeholder="City" value="" name="city_billing">
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-group required">
+                                <label for="input-payment-postcode" class="control-label">Post Code</label>
+                                <input type="text" class="form-control" id="input-payment-postcode" placeholder="Post Code" value="" name="postal_code_billing">
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-group required">
+                                <label for="input-payment-country" class="control-label">Country</label>
+                                <select class="form-control" id="input-payment-country" name="country_billing">
+                                  <option value="Bangladesh">Bangladesh</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="checkbox">
+                                <label>
+                                  <br>
+                                  <input type="checkbox"  value="1" name="shipping_address" id="shipping_address">
+                                  My delivery and billing addresses are the same.</label>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+              </div>
+
+              <div class="panel panel-default delivery-address">
+                <div class="panel-heading">
+                  <h4 class="panel-title"><i class="fa fa-book"></i> Your Delivery Address</h4>
+                </div>
+                  <div class="panel-body">
+                        <fieldset id="address" class="required">
+                          <div class="form-group required">
+                            <label for="input-payment-company" class="control-label">Name</label>
+                            <input type="text" class="form-control" id="input-payment-company" placeholder="Name" value="" name="name_delivery">
+                          </div>
+                          <div class="form-group required">
+                            <label for="input-payment-company" class="control-label">Phone</label>
+                            <input type="text" class="form-control" id="input-payment-company" placeholder="Phone" value="" name="mobile_no_delivery">
+                          </div>
+                          <div class="form-group required">
+                            <label for="input-payment-address-1" class="control-label">Address</label>
+                            <input type="text" class="form-control" id="input-payment-address-1" placeholder="Address" value="" name="address_delivery">
+                          </div>
+                            
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="form-group required">
+                                <label for="input-payment-city" class="control-label">City</label>
+                                <input type="text" class="form-control" id="input-payment-city" placeholder="City" value="" name="city_delivery">
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-group required">
+                                <label for="input-payment-postcode" class="control-label">Post Code</label>
+                                <input type="text" class="form-control" id="input-payment-postcode" placeholder="Post Code" value="" name="postal_code_delivery">
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-group required">
+                                <label for="input-payment-country" class="control-label">Country</label>
+                                <select class="form-control" id="input-payment-country" name="country_delivery">
+                                  <option value="Bangladesh">Bangladesh</option>
+                                </select>
+                              </div>
+                            </div>
+                            
+                          </div>
+                        </fieldset>
+                      </div>
                   </div>
-                 </div>
                  @endif
-                 <div class="col-sm-6">
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title"><i class="fa fa-credit-card"></i> Payment Method</h4>
                     </div>
                       <div class="panel-body">
-                        <p>Select a payment method</p>
+                        <p>Please select the preferred payment method to use on this order.</p>
 
                         @foreach($frontend_payment_methods as $data)
                         <div class="radio">
@@ -118,10 +203,9 @@
                         </div>
                         @endforeach
                       </div>
-                   </div>
                   </div>
                
-                  <div class="col-sm-6"> 
+                 
                     <div class="panel panel-default">
                       <div class="panel-heading">
                         <h4 class="panel-title"><i class="fa fa-pencil"></i> Add Comments About Your Order</h4>
@@ -132,17 +216,13 @@
                           <!-- <label class="control-label" for="confirm_agree">
                             <input type="checkbox" checked="checked" value="1" required="" class="validate required" id="confirm_agree" name="confirm agree">
                             <span>I have read and agree to the <a class="agree" href="#"><b>Terms &amp; Conditions</b></a></span> </label> -->
+                          <div class="buttons">
+                            <div class="pull-right">
+                              <input type="submit" class="btn btn-primary" id="button-confirm" value="Confirm Order">
+                            </div>
+                          </div>
                         </div>
                     </div>
-                  </div>
-                  <div class="col-sm-12">
-                      <div class="buttons">
-                        <div class="pull-right">
-                          <input type="submit" class="btn btn-primary" id="button-confirm" value="Confirm Order">
-                        </div>
-                      </div>
-                  </div>
-                </div>
               </div>
             </div>
             </form>
