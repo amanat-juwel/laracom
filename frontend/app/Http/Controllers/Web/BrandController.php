@@ -18,6 +18,7 @@ use Validator;
 use Auth;
 use App\Batch;
 use App\Stock;
+use App\Slider;
 
 class BrandController extends Controller
 {
@@ -39,9 +40,11 @@ class BrandController extends Controller
 
         $items = Item::orderBy('item_name','asc')->where('brand_id', $brand->brand_id)->paginate(16);
 
-        //return dd($items);
+        $sidebar_sliders = \Cache::remember('sidebar_sliders', 2*60, function() {
+            return Slider::orderBy('slider_order','asc')->where('active', 1)->where('type', 'sidebar')->get();
+        });
 
-        return view('frontend.product.brand.show', compact('brand','items'));
+        return view('frontend.product.brand.show', compact('brand','items','sidebar_sliders'));
     }
 
 

@@ -21,7 +21,7 @@ class WebController extends Controller
     {      
 
         $sliders = \Cache::remember('sliders', 2*60, function() {
-            return Slider::orderBy('slider_order','asc')->get();
+            return Slider::orderBy('slider_order','asc')->where('active', 1)->where('type', 'main')->get();
         });
 
         $newly_arrived_items = \Cache::remember('newly_arrived_items', 2*60, function() {

@@ -436,7 +436,7 @@ Version     : 1.0
                     <li class="treeview {{ (Request::path() == 'admin/pages') ? 'active' : '' }} {{ Request::is('admin/sliders') ? 'active' : '' }}">
                         <a href="#">
                             <i class="fa fa-globe text-maroon"></i>
-                            <span>Web</span>
+                            <span>Site Settings</span>
                             <span class="pull-right-container">
                           <i class="fa fa-angle-left pull-right text-maroon"></i>
                         </span>
@@ -444,7 +444,8 @@ Version     : 1.0
                        
                         <ul class="treeview-menu">
                             <li><a href="{{ url('/admin/pages') }}"><i class="fa fa-database"></i> <span>Page </span></a></li>   
-                            <li><a href="{{ url('/admin/sliders') }}"><i class="fa fa-database"></i> <span>Slider </span></a></li>  
+                            <li><a href="{{ url('/admin/sliders') }}"><i class="fa fa-database"></i> <span>Slider </span></a></li> 
+                            <li><a href="{{ url('/admin/web-homepage') }}"><i class="fa fa-database"></i> <span>HomePage </span></a></li>  
                         </ul>
                         
                     </li> 
@@ -464,6 +465,7 @@ Version     : 1.0
                             <li><a href="{{ url('/admin/users/manage-users') }}"><i class="fa fa-users"></i> <span>System Users</span></a></li> 
                             <li><a href="{{ url('/admin/logs') }}"><i class="fa fa-history"></i> <span>Logs</span></a></li>  
                             <li><a href="{{ url('/admin/settings') }}"><i class="fa fa-gears"></i> <span>Settings</span></a></li>  
+                            <li><a href="{{ url('/admin/clearCache') }}" target="_blank"><i class="fa fa-gears"></i> <span>Clear Cache</span></a></li>  
                             <!-- @endif  -->
                         </ul>
                         

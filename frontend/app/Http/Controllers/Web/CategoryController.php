@@ -18,6 +18,7 @@ use Validator;
 use Auth;
 use App\Batch;
 use App\Stock;
+use App\Slider;
 
 class CategoryController extends Controller
 {
@@ -28,6 +29,10 @@ class CategoryController extends Controller
 
     public function show($cata_name)
     {
+
+        $sidebar_sliders = \Cache::remember('sidebar_sliders', 2*60, function() {
+            return Slider::orderBy('slider_order','asc')->where('active', 1)->where('type', 'sidebar')->get();
+        });
 
         $category = DB::table('tbl_category')->where('cata_name',"$cata_name")->first();
 
@@ -41,7 +46,22 @@ class CategoryController extends Controller
 
         //return dd($items);
 
-        return view('frontend.product.category.show', compact('category','items'));
+        return view('frontend.product.category.show', compact('category','items','sidebar_sliders'));
+    }
+
+    public function search(Request $request)
+    {
+
+        $sidebar_sliders = \Cache::remember('sidebar_sliders', 2*60, function() {
+            return Slider::orderBy('slider_order','asc')->where('active', 1)->where('type', 'sidebar')->get();
+        });
+
+        $items = Item::orderBy('item_name','asc')
+        ->where('item_name', 'like', '%'.$request->search.'%')
+        ->orWhere('description', 'like', '%'.$request->search.'%')
+        ->paginate(16);
+
+        return view('frontend.product.category.show', compact('items','sidebar_sliders'));
     }
 
 

@@ -21,8 +21,8 @@ HOME
             <div class="col-sm-4 pull-right flip">
               <div class="marketshop-banner">
                 <div class="row">
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="sample-banner1" alt="sample-banner1" src="{{asset('public/frontend/images/banner')}}/ban-1.jpg"></a></div>
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="sample-banner" alt="sample-banner" src="{{asset('public/frontend/images/banner')}}/ban-2.jpg"></a></div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="sample-banner1" alt="sample-banner1" src='{{ asset("$globalSettings->banner_1") }}'></a></div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="sample-banner" alt="sample-banner" src='{{ asset("$globalSettings->banner_2") }}'></a></div>
                 </div>
               </div>
             </div>
@@ -59,7 +59,7 @@ HOME
           <!-- Slim-Fixed-Banner Start -->
           <div class="marketshop-banner">
             <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="1 Block Banner" alt="1 Block Banner" src="{{asset('public/frontend/images/banner')}}/1blockbanner-1140x75.jpg"></a></div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="1 Block Banner" alt="1 Block Banner" src='{{ asset("$globalSettings->banner_3") }}'></a></div>
             </div>
           </div>
           <!-- Slim-Fixed-Banner End -->

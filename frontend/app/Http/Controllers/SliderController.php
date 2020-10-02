@@ -52,6 +52,7 @@ class SliderController extends Controller
 
         $slider = new Slider;
         $slider->image = $_imageUrl;
+        $slider->type = $request->type;
         $slider->title = $request->title;
         $slider->sub_title = $request->sub_title;
         $slider->redirect_link = $request->redirect_link;
@@ -121,7 +122,7 @@ class SliderController extends Controller
 
         }
         //end image upload
-
+        $slider->type = $request->type;
         $slider->title = $request->title;
         $slider->sub_title = $request->sub_title;
         $slider->redirect_link = $request->redirect_link;

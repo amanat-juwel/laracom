@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title',isset($category->cata_name) ? $category->cata_name : $category->name)
+@section('title',isset($category->cata_name) ? $category->cata_name : 'Search Result')
 
 @section('body')
 
@@ -10,7 +10,7 @@
       <ul class="breadcrumb">
         <li><a href="{{url('/')}}"><i class="fa fa-home"></i></a></li>
         <li><a href="#">Category</a></li>
-        <li><a href="#">{{isset($category->cata_name) ? $category->cata_name : $category->name}}</a></li>
+        <li><a href="#">{{isset($category->cata_name) ? $category->cata_name : 'Search Result'}}</a></li>
       </ul>
       <!-- Breadcrumb End-->
       <div class="row">
@@ -26,7 +26,7 @@
         <!--Left Part End -->
         <!--Middle Part Start-->
         <div id="content" class="col-sm-9">
-          <h1 class="title">{{isset($category->cata_name) ? $category->cata_name : $category->name}}</h1>
+          <h1 class="title">{{isset($category->cata_name) ? $category->cata_name : 'Search Result'}}</h1>
           <div class="product-filter">
             <div class="row">
               <div class="col-md-4 col-sm-5">

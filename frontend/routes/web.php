@@ -24,6 +24,7 @@ Route::prefix('web')->group(function(){
   Route::get('/brands/', 'Web\BrandController@index');
   Route::get('/brands/{brand_name}', 'Web\BrandController@show');
   Route::get('/categories/{cata_name}', 'Web\CategoryController@show');
+  Route::get('/search', 'Web\CategoryController@search');
   Route::get('/contact-us/', 'Web\ContactUsController@index');
   //ADD-TO-WISHLIST
   Route::post('/add-to-wishlist', 'WishlistController@store');
@@ -65,6 +66,11 @@ Route::prefix('admin')->group(function() {
   //SETTINGS
   Route::get('/settings', 'SettingsController@index');
   Route::post('/settings/update', 'SettingsController@update');
+  Route::get('/clearCache', 'SettingsController@clearCache');
+
+  //HOMEPAGE BANNERS
+  Route::get('web-homepage','SettingsController@homepageBannerIndex');
+  Route::post('web-homepage','SettingsController@homepageBannerUpdate');
 
   Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
   Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');

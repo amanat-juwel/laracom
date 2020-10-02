@@ -99,4 +99,77 @@ class SettingsController extends Controller
 
     }
 
+    public function homepageBannerIndex()
+    {
+        $settings = DB::table('settings')->where('setting_id','=','1')->first();
+
+        return view('admin.settings.web-homepage.index',compact('settings'));
+    }
+
+    public function homepageBannerUpdate(Request $request)
+    {
+        
+        $settings = DB::table('settings')->where('setting_id','=','1')->first();
+
+        //Handling image
+        if($request->file('banner_1')!=''){
+            $banner = $request->file('banner_1');
+            $name = time().$banner->getClientOriginalName();
+            $uploadPath = 'public/frontend/images/banner/';
+            $banner->move($uploadPath,$name);
+            $banner_1 = $uploadPath.$name;
+        }
+        else{
+            $banner_1 = $settings->banner_1;
+        }
+
+        //Handling image
+        if($request->file('banner_2')!=''){
+            $banner = $request->file('banner_2');
+            $name = time().$banner->getClientOriginalName();
+            $uploadPath = 'public/frontend/images/banner/';
+            $banner->move($uploadPath,$name);
+            $banner_2 = $uploadPath.$name;
+        }
+        else{
+            $banner_1 = $settings->banner_1;
+        }
+
+        //Handling image
+        if($request->file('banner_3')!=''){
+            $banner = $request->file('banner_3');
+            $name = time().$banner->getClientOriginalName();
+            $uploadPath = 'public/frontend/images/banner/';
+            $banner->move($uploadPath,$name);
+            $banner_3 = $uploadPath.$name;
+        }
+        else{
+            $banner_3 = $settings->banner_3;
+        }
+
+        DB::table('settings')
+            ->where('setting_id', 1)
+            ->update([
+                      'banner_1' => $banner_1,
+                      'banner_2'=> $banner_2,
+                      'banner_3'=> $banner_3
+                      ]);
+                      
+        \Cache::forget('globalSettings');
+
+        return redirect()->back()->with('success', 'Settings Updated Successfully');
+
+    }
+
+    public function clearCache() {
+        
+        \Cache::forget('globalSettings');
+        \Cache::forget('sliders');
+        \Cache::forget('pages_front_view');
+        \Cache::forget('brands_front_view');
+        \Cache::forget('frontend_payment_methods');
+
+        echo 'Cache Cleared';
+    }
+
 }

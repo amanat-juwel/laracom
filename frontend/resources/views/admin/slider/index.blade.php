@@ -29,6 +29,7 @@
                                     <thead>
                                         <tr>
                                             <th>Srl</th>
+                                            <th>Type</th>
                                             <th>Title</th>
                                             <th>Sub-Title</th>
                                             <th>Image</th>
@@ -45,6 +46,7 @@
                                             @foreach($sliders as $key => $data)
                                             <tr>
                                                 <td height="25">{{ ++$key }}</td>
+                                                <td>{{ $data->type }}</td>
                                                 <td>{{ $data->title }}</td>
                                                 <td>{{ $data->sub_title }}</td>
                                                 <td>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 29, 2020 at 05:23 PM
+-- Generation Time: Oct 02, 2020 at 05:10 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.5
 
@@ -343,15 +343,18 @@ CREATE TABLE `settings` (
   `next_due_date` date NOT NULL,
   `next_service_hault_date` date DEFAULT NULL,
   `service_charge` float NOT NULL,
-  `bkash_no` varchar(100) DEFAULT NULL
+  `bkash_no` varchar(100) DEFAULT NULL,
+  `banner_1` text DEFAULT NULL,
+  `banner_2` text DEFAULT NULL,
+  `banner_3` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`setting_id`, `company_name`, `website`, `logo`, `system_logo`, `favicon`, `address`, `mobile`, `phone`, `fax`, `email`, `vat_registration_no`, `currency`, `payment_instruction`, `full_sidebar`, `theme`, `profit_margin`, `vat_percent`, `invoice_prefix`, `discount_mode`, `sms_sender`, `sms_api_key`, `payment_notification`, `next_due_date`, `next_service_hault_date`, `service_charge`, `bkash_no`) VALUES
-(1, 'Shopper', 'www.example.com', 'public/admin/images/1554714555logoecom.png', 'public/admin/images/1554714668jmg.jpg', 'public/admin/images/1554714406StoreIcon.png', 'Central Square, 22 Hoi Wing Road, Chittagong, Bangladesh', '01816-302720', '031-235265', '', 'info@gmail.com', '', 'BDT', '', 0, 'blue', 0, 0, 'BTG', 'TK', '', '', 'off', '2019-03-01', '2099-03-07', 1000, 'XXXXX-YYY-YYY');
+INSERT INTO `settings` (`setting_id`, `company_name`, `website`, `logo`, `system_logo`, `favicon`, `address`, `mobile`, `phone`, `fax`, `email`, `vat_registration_no`, `currency`, `payment_instruction`, `full_sidebar`, `theme`, `profit_margin`, `vat_percent`, `invoice_prefix`, `discount_mode`, `sms_sender`, `sms_api_key`, `payment_notification`, `next_due_date`, `next_service_hault_date`, `service_charge`, `bkash_no`, `banner_1`, `banner_2`, `banner_3`) VALUES
+(1, 'Shopper', 'www.example.com', 'public/admin/images/1554714555logoecom.png', 'public/admin/images/1554714668jmg.jpg', 'public/admin/images/1554714406StoreIcon.png', 'Central Square, 22 Hoi Wing Road, Chittagong, Bangladesh', '01816-302720', '031-235265', '', 'info@gmail.com', '', 'BDT', '', 0, 'blue', 0, 0, 'BTG', 'TK', '', '', 'off', '2019-03-01', '2099-03-07', 1000, 'XXXXX-YYY-YYY', 'public/frontend/images/banner/1601648648ban-1.jpg', 'public/frontend/images/banner/1601648648ban-2.jpg', 'public/frontend/images/banner/16016486481blockbanner-1140x75.jpg');
 
 -- --------------------------------------------------------
 
@@ -361,6 +364,7 @@ INSERT INTO `settings` (`setting_id`, `company_name`, `website`, `logo`, `system
 
 CREATE TABLE `sliders` (
   `id` int(11) NOT NULL,
+  `type` varchar(10) NOT NULL DEFAULT 'main',
   `title` varchar(250) NOT NULL,
   `sub_title` text DEFAULT NULL,
   `image` text DEFAULT NULL,
@@ -375,10 +379,10 @@ CREATE TABLE `sliders` (
 -- Dumping data for table `sliders`
 --
 
-INSERT INTO `sliders` (`id`, `title`, `sub_title`, `image`, `redirect_link`, `active`, `slider_order`, `created_at`, `updated_at`) VALUES
-(1, '1', '1', 'public/frontend/images/main-slider/1598712331bundle-offer-1wb.jpg', '#', 1, 1, '2019-04-04 06:19:14', '2020-08-29 14:45:31'),
-(2, '2', '2', 'public/frontend/images/main-slider/1598712343BenQ-EX2780Q.jpg', '#', 1, 1, '2019-04-04 06:20:07', '2020-08-29 14:45:43'),
-(3, '3', '3', 'public/frontend/images/main-slider/1598712353ekwb aio banner.jpg', '#', 1, 1, '2019-04-04 06:20:16', '2020-08-29 14:45:53');
+INSERT INTO `sliders` (`id`, `type`, `title`, `sub_title`, `image`, `redirect_link`, `active`, `slider_order`, `created_at`, `updated_at`) VALUES
+(1, 'main', '1', '1', 'public/frontend/images/main-slider/1598712331bundle-offer-1wb.jpg', '#', 1, 1, '2019-04-04 06:19:14', '2020-08-29 14:45:31'),
+(2, 'main', '2', '2', 'public/frontend/images/main-slider/1598712343BenQ-EX2780Q.jpg', '#', 1, 1, '2019-04-04 06:20:07', '2020-10-02 14:49:13'),
+(3, 'main', '3', '3', 'public/frontend/images/main-slider/1598712353ekwb aio banner.jpg', '#', 1, 1, '2019-04-04 06:20:16', '2020-10-02 14:49:20');
 
 -- --------------------------------------------------------
 

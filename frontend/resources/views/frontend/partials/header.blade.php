@@ -9,8 +9,11 @@
       <!-- Search Start-->
       <div class="col-table-cell col-lg-5 col-md-5 col-md-push-0 col-sm-6 col-sm-push-6 col-xs-12">
         <div id="search" class="input-group">
-          <input id="filter_name" type="text" name="search" value="" placeholder="Search" class="form-control input-lg" />
-          <button type="button" class="button-search"><i class="fa fa-search"></i></button>
+        <form action="{{ url('web/search') }}" method="get">
+          {{ csrf_field() }}
+          <input id="filter_name" type="text" name="search" value="@if(isset($_GET['search'])) {{$_GET['search']}} @endif" placeholder="Search" class="form-control input-lg" />
+          <button type="submit" class="button-search"><i class="fa fa-search"></i></button>
+        </form>
         </div>
       </div>
       <!-- Search End-->

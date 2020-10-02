@@ -31,6 +31,15 @@
                                 </div>
                                 <div class="box-body">
                                     <div class="form-group">
+                                      <label  for="email">Type</label>
+                                      <div >
+                                        <select name="type" id="type" class="form-control input-sm" />
+                                            <option value="main">Main</option>
+                                            <option value="sidebar">Sidebar</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="">Title</label>
                                         <input autocomplete="OFF" placeholder="" type="text" name="title" id="title" class="form-control input-sm" value="" />
                                         @if($errors->has('title'))
